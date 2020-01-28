@@ -1,0 +1,72 @@
+{% extends 'base_user_center.html' %}
+{% block right_content %}
+    <div class="right_content clearfix">
+				<h3 class="common_title2">收货地址</h3>
+				<div class="site_con">
+					<dl>
+						<dt>当前默认地址：</dt>
+                        {% if default_address %}
+						    <dd>{{ default_address.addr }} （{{ default_address.receiver }} 收） {{ default_address.phone }}</dd>
+                        {% else %}
+                            <dd>无默认地址</dd>
+                        {% endif %}
+					</dl>					
+				</div>
+                <h3 class="common_title2">地址列表</h3>
+                    <div class="site_con">
+                        {% for address in all_address %}
+                            <dl>
+                                {% if address %}
+                                    <dd>{{ address.addr }} （{{ address.receiver }} 收） {{ address.phone }}
+                                        {% if address != default_address %}&nbsp;&nbsp;&nbsp;
+                                            <a href="/dailyfresh/user/set_default_address/{{ address.id }}" style="color: red;font-size: 5px">
+                                                设置默认
+                                            </a>
+                                        {% endif %}
+
+                                    </dd>
+
+                                {% else %}
+                                    <dd>无默认地址</dd>
+                                {% endif %}
+                            </dl>
+                        {% endfor %}
+                    </div>
+
+
+
+				<h3 class="common_title2">编辑地址</h3>
+				<div class="site_con">
+					<form method="post">
+                        {% csrf_token %}
+						<div class="form_group">
+							<label>收件人：</label>
+							<input type="text" name="receiver">
+						</div>
+						<div class="form_group form_group2">
+							<label>详细地址：</label>
+							<textarea class="site_area" name="addr"></textarea>
+						</div>
+						<div class="form_group">
+							<label>邮编：</label>
+							<input type="text" name="zip_code">
+						</div>
+						<div class="form_group">
+							<label>手机：</label>
+							<input type="text" name="phone">
+						</div>
+
+						<input type="submit" name="" value="提交" class="info_submit">
+					</form>
+				</div>
+		</div>
+{% endblock right_content %}
+
+{% block bottomfiles %}
+    <script>
+        var errmsg = '{{ errmsg }}'
+        if (errmsg!=''){
+            alert('错误信息:' + errmsg)
+        }
+    </script>
+{% endblock bottomfiles %}
