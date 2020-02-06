@@ -152,7 +152,7 @@ EMAIL_PORT = 465
 # 发送邮件的邮箱
 EMAIL_HOST_USER = 'laisent@163.com'
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'z122122123xc'
+EMAIL_HOST_PASSWORD = '123456789'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<laisent@163.com>'
 
